@@ -68,7 +68,7 @@ function run_in_container() {
   local IMAGE="dokku/$APP"
 
   log_debug "Executing command in container: $COMMAND"
-  local id=$(docker run -i -a stdin $IMAGE /bin/bash -c "$COMMAND")
+  local id=$(docker run -d $IMAGE /bin/bash -c "$COMMAND")
 
   test $(docker wait $id) -eq 0
   docker commit $id $IMAGE > /dev/null
